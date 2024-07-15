@@ -10,9 +10,6 @@
 
 namespace dutchheight\navie\models;
 
-use dutchheight\navie\Navie;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -28,7 +25,7 @@ class Settings extends Model
     /**
      * @var string
      */
-    public $pluginName = 'Navie';
+    public string $pluginName = 'Navie';
 
     // Public Methods
     // =========================================================================
@@ -36,7 +33,7 @@ class Settings extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['pluginName', 'string'],
