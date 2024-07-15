@@ -162,7 +162,8 @@ class ListItem extends Element
     /**
      * @inheritdoc
      */
-    public function getUrl() {
+    public function getUrl(): ?string
+    {
         if ($this->type === 'url') {
             return Craft::parseEnv($this->_url);
         } else {
@@ -298,7 +299,7 @@ class ListItem extends Element
         return $actions;
     }
 
-    public static function eagerLoadingMap(array $sourceElements, string $handle)
+    public static function eagerLoadingMap(array $sourceElements, string $handle): false|array|null
     {
         $types = ['entry', 'category', 'asset'];
 
@@ -333,12 +334,13 @@ class ListItem extends Element
         ];
     }
 
-    public function setEagerLoadedElements(string $handle, array $elements)
+    public function setEagerLoadedElements(string $handle, array $elements): void
     {
         $types = ['entry', 'category', 'asset'];
 
         if (!in_array($handle, $types) || !count($elements)) {
-            return parent::setEagerLoadedElements($handle, $elements);
+            parent::setEagerLoadedElements($handle, $elements);
+            return;
         }
 
         $element = $elements[0];
@@ -368,7 +370,7 @@ class ListItem extends Element
     /**
      * @var int ID
      */
-    public $id;
+    public ?int $id;
 
     /**
      * @var int List ID
@@ -383,7 +385,7 @@ class ListItem extends Element
     /**
      * @var int Site ID
      */
-    public $siteId;
+    public ?int $siteId;
 
     /**
      * @var int Element ID
@@ -429,10 +431,11 @@ class ListItem extends Element
     // Public Methods
     // =========================================================================
 
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules[] = [['listId', 'newParentId'], 'number', 'integerOnly' => true];
+
         return $rules;
     }
 
@@ -489,7 +492,7 @@ class ListItem extends Element
      /**
      * @inheritdoc
      */
-    public function getFieldLayout()
+    public function getFieldLayout(): ?\craft\models\FieldLayout
     {
         return parent::getFieldLayout() ?? $this->getList()->getFieldLayout();
     }
@@ -573,7 +576,7 @@ class ListItem extends Element
      * @inheritdoc
      * @throws Exception if reasons
      */
-    public function afterSave(bool $isNew)
+    public function afterSave(bool $isNew): void
     {
         $list = $this->getList();
 
@@ -616,7 +619,7 @@ class ListItem extends Element
     /**
      * @inheritdoc
      */
-    public function afterDelete()
+    public function afterDelete(): void
     {
         try {
             $conditions = [];
@@ -634,7 +637,7 @@ class ListItem extends Element
     /**
      * @inheritdoc
      */
-    public function setFieldValuesFromRequest(string $paramNamespace = '')
+    public function setFieldValuesFromRequest(string $paramNamespace = ''): void
     {
         $this->setFieldParamNamespace($paramNamespace);
         $values = Craft::$app->getRequest()->getBodyParam($paramNamespace, []);
