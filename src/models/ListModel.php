@@ -97,7 +97,7 @@ class ListModel extends Model
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'fieldLayout' => [

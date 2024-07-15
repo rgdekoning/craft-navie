@@ -33,7 +33,7 @@ class ListItem extends ObjectType
     /**
      * @inheritdoc
      */
-    protected function resolve($source, $arguments, $context, ResolveInfo $resolveInfo)
+    protected function resolve($source, $arguments, $context, ResolveInfo $resolveInfo): mixed
     {
         /** @var ListItemElement $source */
         $fieldName = $resolveInfo->fieldName;

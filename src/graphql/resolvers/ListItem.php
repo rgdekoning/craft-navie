@@ -8,7 +8,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 class ListItem extends ElementResolver 
 {
-    public static function prepareQuery($source, array $arguments, $fieldName = null)
+    public static function prepareQuery($source, array $arguments, $fieldName = null): mixed
     {
         if ($source === null) {
             $query = ListItemElement::find();

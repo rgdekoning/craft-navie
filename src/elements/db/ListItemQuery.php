@@ -28,7 +28,7 @@ class ListItemQuery extends ElementQuery
     /**
      * @var int|null ID
      */
-    public $id;
+    public mixed $id;
 
     /**
      * @var int|null List ID
@@ -71,7 +71,7 @@ class ListItemQuery extends ElementQuery
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->withStructure = true;
         parent::init();
@@ -150,7 +150,7 @@ class ListItemQuery extends ElementQuery
         return $this;
     }
 
-    public function populate($rows)
+    public function populate($rows): array
     {
         $rows = parent::populate($rows);
 
