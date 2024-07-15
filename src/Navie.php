@@ -11,6 +11,7 @@
 namespace dutchheight\navie;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\events\RegisterGqlQueriesEvent;
 use craft\events\RegisterGqlTypesEvent;
@@ -72,22 +73,22 @@ class Navie extends Plugin
     /**
      * @var boolean
      */
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     /**
      * @var boolean
      */
-    public $hasCpSection = true;
+    public bool $hasCpSection = true;
 
     /**
      * @var string
      */
-    public $schemaVersion = '1.1.2';
+    public string $schemaVersion = '1.1.2';
 
     /**
      * @var bool
      */
-    public static $craft31 = false;
+    public static bool $craft31 = false;
 
     // Public Methods
     // =========================================================================
@@ -111,7 +112,7 @@ class Navie extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
         return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('navie/settings'));
     }
@@ -122,7 +123,7 @@ class Navie extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }
@@ -137,7 +138,7 @@ class Navie extends Plugin
         ]);
     }
 
-    private function _registerEventListeners()
+    private function _registerEventListeners(): void
     {
         $request = Craft::$app->getRequest();
 
@@ -158,7 +159,7 @@ class Navie extends Plugin
         }
     }
 
-    private function _registerGlobalEventListeners()
+    private function _registerGlobalEventListeners(): void
     {
         // Handler: CraftVariable::EVENT_INIT
         Event::on(
@@ -172,7 +173,7 @@ class Navie extends Plugin
         );
     }
 
-    private function _registerGraphql()
+    private function _registerGraphql(): void
     {
         Event::on(
             Gql::class,
@@ -191,7 +192,7 @@ class Navie extends Plugin
         );
     }
 
-    private function _registerCpEventListeners()
+    private function _registerCpEventListeners(): void
     {
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
@@ -245,7 +246,7 @@ class Navie extends Plugin
      *
      * @return array
      */
-    private function _registerCpPermissions()
+    private function _registerCpPermissions(): array
     {
         $lists = Navie::$plugin->getLists()->getAllLists();
         $permissions = [];
