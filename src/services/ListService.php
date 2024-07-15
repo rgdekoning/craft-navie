@@ -318,7 +318,7 @@ class ListService extends Component
 
         if ($this->hasEventHandlers(self::EVENT_BEFORE_DELETE_LIST)) {
             $this->trigger(self::EVENT_BEFORE_DELETE_LIST, new ListEvent([
-                $list => $list
+                'list' => $list
             ]));
         }
 
@@ -366,7 +366,7 @@ class ListService extends Component
 
         if ($this->hasEventHandlers(self::EVENT_AFTER_DELETE_LIST)) {
             $this->trigger(self::EVENT_AFTER_DELETE_LIST, new ListEvent([
-                $list => $list
+                'list' => $list
             ]));
         }
 
